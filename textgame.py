@@ -125,7 +125,7 @@ class MonsterFightWorld:
 
                 dmg_basilisk = randint(30, 40)
                 venom_spew = randint(1, 10) #1 in 10 chance to cast venom spew
-                venom_spew_dmg = 150
+                venom_spew_dmg = 200
 
                 if venom_spew == 1 and basilisk_charged is False:
                     slow_text("Basilisk is charging, it will cast its special ability Venom Spew next turn!\n", 0, 2)
@@ -163,7 +163,7 @@ class Main:
             return True
 
     def main_menu(self):
-        print("--------")
+        print("\n--------")
         print("Welcome (back) to the main menu.\n")
         print("Available worlds:")
         print("\tWorld 1: Defeat a tough monster!")
@@ -184,7 +184,8 @@ class Main:
         while True:
             world = self.main_menu()
             current_world_completed = Main.worlds.get(world).enter_world()
-            Main.completed[world] = current_world_completed
+            if Main.completed[world] is False: #assures already completed world stays completed even if player restarts and then loses the level after 
+                Main.completed[world] = current_world_completed
             if Main.all_worlds_completed():
                 slow_text("Congratulations, you beat all worlds! Game ends now.", 0, 3)
                 break
