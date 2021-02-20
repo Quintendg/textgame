@@ -128,11 +128,11 @@ class MonsterFightWorld:
                 venom_spew_dmg = 200
 
                 if venom_spew == 1 and basilisk_charged is False:
-                    slow_text("Basilisk is charging, it will cast its special ability Venom Spew next turn!\n", 0, 2)
+                    slow_text("Basilisk is charging, it will cast its special ability Venom Spew (200 dmg) next turn!\n", 0, 2)
                     basilisk_charged = True
                 elif basilisk_charged:
                     legend_hp -= venom_spew_dmg
-                    slow_text("The Baselisk casts Venom Spew and damages you for 150 HP!!\n", 0, 2)
+                    slow_text("The Baselisk casts Venom Spew and damages you for 200 HP!!\n", 0, 2)
                     basilisk_charged = False
                 else:
                     legend_hp -= dmg_basilisk
