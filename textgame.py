@@ -14,11 +14,11 @@ def slow_text(string, delay, wait):
 class MonsterFightWorld:
 
     def enter_world(self):
-        slow_text("You spot a cave in the distance.\n", 0, 0) 
-        slow_text("You walk towards it and decide to enter it.\n", 0, 0)
-        slow_text("As you walk slowly through the cave you suddenly approach a round door.\n", 0, 0)
-        slow_text("It stops you from going further.\n", 0, 0)
-        slow_text("There appears to be a riddle on the door:\n", 0, 0)
+        slow_text("You spot a cave in the distance.\n", 0, 3) 
+        slow_text("You walk towards it and decide to enter it.\n", 0, 3)
+        slow_text("As you walk slowly through the cave you suddenly approach a round door.\n", 0, 3)
+        slow_text("It stops you from going further.\n", 0, 3)
+        slow_text("There appears to be a riddle on the door:\n", 0, 3)
         slow_text("\tI am long\n", 0, 0)
         slow_text("\tI haven't got legs\n", 0, 0)
         slow_text("\tI can't walk\n", 0, 0)
