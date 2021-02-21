@@ -156,8 +156,7 @@ class Main:
         }
         self.completed = {f'World {i}': False for i in range(1, 5)}
 
-    @staticmethod
-    def all_worlds_completed():
+    def all_worlds_completed(self):
         if False in self.completed.values():
             return False
         else:
@@ -185,7 +184,7 @@ class Main:
         while True:
             world = self.main_menu()
             current_world_completed = self.worlds.get(world).enter_world()
-            if self.completed[world] is not True: #assures already completed world stays completed even if player restarts and then loses the level
+            if self.completed[world] is not True: #assures already completed world stays completed even if player restarts level and then loses the level
                 self.completed[world] = current_world_completed
             if self.all_worlds_completed():
                 slow_text("Congratulations, you beat all worlds! Game ends now.", 0, 3)
