@@ -16,7 +16,7 @@ class MonsterFightWorld:
     def enter_world(self):
         slow_text("You spot a cave in the distance.\n", 0, 3) 
         slow_text("You walk towards it and decide to enter it.\n", 0, 3)
-        slow_text("As you walk slowly through the cave you suddenly approach a round door.\n", 0, 3)
+        slow_text("As you slowly walk through the cave you suddenly approach a round door.\n", 0, 3)
         slow_text("It stops you from going further.\n", 0, 3)
         slow_text("There appears to be a riddle on the door:\n", 0, 3)
         slow_text("\tI am long\n", 0, 0)
@@ -37,7 +37,7 @@ class MonsterFightWorld:
             slow_text("You failed too many times.\n", 0, 2)
             slow_text("The environment starts shaking heavily.\n", 0, 3) 
             slow_text("The ceiling collapses on you.\n", 0, 3)
-            slow_text("You're dead...", 0.4, 2)
+            slow_text("You're dead...", 0.3, 2)
             print("\n")
             return False
         else:
@@ -51,7 +51,7 @@ class MonsterFightWorld:
                 slow_text("Prepare for battle!", 0.1, 2)
             else:
                 slow_text("As soon as you turn around to flee you hear a loud screech.\n", 0, 3)
-                slow_text("REEEEEEEEEE!!!\n", 0.4, 1.5)
+                slow_text("REEEEEEEEEE!!!\n", 0.2, 1.5)
                 slow_text("Oh no... it woke up...\n", 0.1, 2) 
                 slow_text("It starts slithering towards you...\n", 0, 3)
                 slow_text("You draw your sword.\n", 0, 3) 
@@ -147,13 +147,14 @@ class MonsterFightWorld:
 
 class Main:
 
-    worlds = {
-        'World 1': MonsterFightWorld() 
-        # 'World 2': ,
-        # 'World 3': ,
-        # 'World 4': 
-    }
-    completed = {f'World {i}': False for i in range(1, 5)}
+    def __init__(self):
+        self.worlds = {
+            'World 1': MonsterFightWorld() 
+            # 'World 2': ,
+            # 'World 3': ,
+            # 'World 4': 
+        }
+        self.completed = {f'World {i}': False for i in range(1, 5)}
 
     @staticmethod
     def all_worlds_completed():
@@ -171,7 +172,7 @@ class Main:
         print("Type below the world you want to enter!")
         while True:
             world_choice = input("> ")
-            if world_choice not in Main.worlds.keys():
+            if world_choice not in self.worlds.keys():
                 print("Not a world.")
                 continue
             else:
@@ -183,10 +184,10 @@ class Main:
     def play(self):
         while True:
             world = self.main_menu()
-            current_world_completed = Main.worlds.get(world).enter_world()
-            if Main.completed[world] is False: #assures already completed world stays completed even if player restarts and then loses the level after 
-                Main.completed[world] = current_world_completed
-            if Main.all_worlds_completed():
+            current_world_completed = self.worlds.get(world).enter_world()
+            if self.completed[world] is not True: #assures already completed world stays completed even if player restarts and then loses the level
+                self.completed[world] = current_world_completed
+            if self.all_worlds_completed():
                 slow_text("Congratulations, you beat all worlds! Game ends now.", 0, 3)
                 break
 
