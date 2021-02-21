@@ -79,8 +79,8 @@ class MonsterFightWorld:
 
                 action = input("> ")
 
-                if action == "1" or action == "attack" or action == "2":
-                    if action != "2":
+                if action == "1" or action == "2":
+                    if action == "1":
                         dmg_legend = randint(40, 70)
                         basilisk_hp -= dmg_legend
                         slow_text(f"You damage the Basilisk for {dmg_legend} HP!\n", 0, 2)
