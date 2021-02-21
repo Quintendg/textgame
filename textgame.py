@@ -115,7 +115,7 @@ class MonsterFightWorld:
                             print(f"You have {hp_potions} HP potion(s) left.")
                             slow_text(f"Your HP is now {legend_hp}/500\n\n", 0, 3)
                     else:
-                        slow_text("You haven't any HP potions left!\n", 0, 3)
+                        slow_text("You haven't any HP potions left!\n\n", 0, 3)
                         continue
                 elif action == "4":
                     slow_text("You flee. Coward!!\n", 0, 2)
@@ -158,7 +158,7 @@ class Main:
 
     @staticmethod
     def all_worlds_completed():
-        if False in Main.completed.values():
+        if False in self.completed.values():
             return False
         else:
             return True
