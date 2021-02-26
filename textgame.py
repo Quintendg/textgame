@@ -13,10 +13,6 @@ def slow_text(string, delay, wait):
         
 class FootballFinal:
 
-    def __init__(self):
-        self.team1_scores = 0
-        self.team2_scores = 0
-
     def enter_world(self):
         slow_text("Reporter:\n", 0, 2)
         slow_text("Welcome to the final of the Champions League on this beautiful day!\n", 0, 3)
@@ -25,7 +21,7 @@ class FootballFinal:
         slow_text("Now, penalties are needed to decide who will be the winner!\n", 0, 3)
         slow_text("The first team to take a penalty is:\n", 0, 2)
         
-        print("\nChoose your favourite player: (please enter the number of the player)")
+        print("\nChoose your favourite players for team 1 and 2: (please enter the numbers of the player)")
         print("1: \tLionel Messi")
         print("2: \tCristiano Ronaldo")
         print("3: \tRobert Lewandowski")
@@ -33,146 +29,65 @@ class FootballFinal:
         print("5: \tKevin de Bruyne")
         
         # Choosing team
+        teams = ["Barcelona", "Juventus", "Bayern Munchen", "Liverpool", "Manchester City"]
         while True:
-            team1 = input("> ")
-            if team1 == "1":
-                team1_name = "Barcelona"
-                print("Your team is Barcelona!")
-                break
-            elif team1 == "2":
-                team1_name = "Juventus"
-                print("Your team is Juventus!")
-                break
-            elif team1 == "3":
-                team1_name = "Bayern München"
-                print("Your team is Bayern München!")
-                break
-            elif team1 == "4":
-                team1_name = "Liverpool"
-                print("Your team is Liverpool!")
-                break
-            elif team1 == "5":
-                team1_name = "Manchester City"
-                print("Your team is Manchester City!")
+            try:
+                print("Team 1:")
+                team1 = int(input("> "))
+                print("Team 2:")
+                team2 = int(input("> "))
+            except:
+                print("Provide a number and not characters.")
+                continue
+
+            if 0 < team1 < 6 and 0 < team2 < 6 and team2 != team1:
+                team1_name = teams[team1 - 1]
+                print(f"Your team is {team1_name}!")
+                team2_name = teams[team2 - 1]
+                print(f"The other team is {team2_name}!")
                 break
             else:
-                print("Please enter a valid number.")
+                print("Please enter a number between 1 and 5 for both teams, and make sure teams are different.")
                 continue
-        
-        slow_text("\nAnd on the other side of the field we have:\n", 0, 1)
          
-        print("\nChoose another player: (please enter the number of the player)")
-        print("1: \tLionel Messi")
-        print("2: \tCristiano Ronaldo")
-        print("3: \tRobert Lewandowski")
-        print("4: \tGeorginio Wijnaldum")
-        print("5: \tKevin de Bruyne")
-        
-        # Choosing opponents team
-        while True: 
-            team2 = input("> ")
-            if team2 != team1:
-                if team2 == "1":
-                    team2_name = "Barcelona"
-                    print("The other team is Barcelona!")
-                    break
-                elif team2 == "2":
-                    team2_name = "Juventus"
-                    print("The other team is Juventus!")
-                    break
-                elif team2 == "3":
-                    team2_name = "Bayern München"
-                    print("The other team is Bayern München!")
-                    break
-                elif team2 == "4":
-                    team2_name = "Liverpool"
-                    print("The other team is Liverpool!")
-                    break
-                elif team2 == "5":
-                    team2_name = "Manchester City"
-                    print("The other team is Manchester City!")
-                    break
-                else:
-                    print("Please enter a valid number.")
-                    continue
-            elif team2 == team1:
-                print("You have already chosen this team!\nPlease choose another team.")
-                continue
-        
-        slow_text(f"\nSo, can {team1_name} handle the pressure better than {team2_name}?\n", 0, 3)
+        slow_text(f"\nSo, can {team1_name} handle the pressure better than {team2_name}?\n", 0, 5)
         print("-"*10)
         
         # Players need to answer questions correct to have a higher chance to score a penalty
         slow_text("Answer questions correct to have a higher chance to score a penalty.\n", 0, 3)
         slow_text("The team which manages to score the most penalties is the winner!\n", 0, 3)
         slow_text("All answers are 'True' or 'False'.\n", 0, 3)
-        
-        # Question 1, true is correct
-        question1 = "\nQuestion 1:\n\nCOVID-19 is an abbreviation for Corona Virus Disease 2019"
-        question_outcome = "True"
-        self.scores_question(team1_name, team2_name, question1, question_outcome)
-    
-        # Question 2, false is correct
-        question2 = "\nQuestion 2:\n\nM&M stands for Mars and Moordale"
-        question_outcome = "False"
-        self.scores_question(team1_name, team2_name, question2, question_outcome)
 
-        # Question 3, false is correct
-        question3 = "\nQuestion 3:\n\nThere are two parts of the body that can't heal themselves"
-        question_outcome = "False"
-        self.scores_question(team1_name, team2_name, question3, question_outcome)
-        
-        # Question 4, true
-        question4 = "\nQuestion 4:\n\nBananas are curved because they grow upwards towards the sun"
-        question_outcome = "True"
-        self.scores_question(team1_name, team2_name, question4, question_outcome)
-        
-        # Question 5, true
-        question5 = "Question 5:\n\nIn the 'normal' Harry Potter story, there are 7 books and 8 movies\n"
-        question_outcome = "True"
-        self.scores_question(team1_name, team2_name, question5, question_outcome)            
-        
-        # Question 6, true
-        question6 = "\nQuestion 6:\n\nThe small intestine is about 7 meters long\n"
-        question_outcome = "True"
-        self.scores_question(team1_name, team2_name, question6, question_outcome)
-        
-        # Question 7, false
-        question7 = "\nQuestion 7:\n\nCoffee will dehydrate you\n"
-        question_outcome = "False"
-        self.scores_question(team1_name, team2_name, question7, question_outcome)
-        
-        # Question 8, false
-        question8 = "\nQuestion 8:\n\nSydney is the capital of Australia\n"
-        question_outcome = "False"
-        self.scores_question(team1_name, team2_name, question8, question_outcome)
-        
-        # Question 9, true
-        question9 = "\nQuestion 9:\n\nCarrots are good for your eyes\n"
-        question_outcome = "True"
-        self.scores_question(team1_name, team2_name, question9, question_outcome)
-        
-        # Question 10, false
-        question10 = "\nQuestion 10:\n\nLightning never strikes the same place twice\n"
-        question_outcome = "False"
-        self.scores_question(team1_name, team2_name, question10, question_outcome)
-        
-        # Question 11, true
-        question11 = "\nQuestion 11:\n\nPeople in Japan eat Kentucky Fried Chicken for Christmas dinner\n"
-        question_outcome = "True"
-        self.scores_question(team1_name, team2_name, question11, question_outcome)
+        questions = [
+            ("\nQuestion 1:\n\nCOVID-19 is an abbreviation for Corona Virus Disease 2019", "True"),
+            ("\nQuestion 2:\n\nM&M stands for Mars and Moordale", "False"),
+            ("\nQuestion 3:\n\nThere are two parts of the body that can't heal themselves", "False"),
+            ("\nQuestion 4:\n\nBananas are curved because they grow upwards towards the sun", "True"),
+            ("\nQuestion 5:\n\nIn the 'normal' Harry Potter story, there are 7 books and 8 movies", "True"),
+            ("\nQuestion 6:\n\nThe small intestine is about 7 meters long", "True"),
+            ("\nQuestion 7:\n\nCoffee will dehydrate you", "False"),
+            ("\nQuestion 8:\n\nSydney is the capital of Australia", "False"),
+            ("\nQuestion 9:\n\nCarrots are good for your eyes", "True"),
+            ("\nQuestion 10:\n\nLightning never strikes the same place twice", "False"),
+            ("\nQuestion 11:\n\nPeople in Japan eat Kentucky Fried Chicken for Christmas dinner", "True")
+        ]
+        team1_score = 0
+        team2_score = 0
+        for q, a in questions:
+            t1_score, t2_score = self.scores_question(team1_name, team2_name, team1_score, team2_score, q, a)
+            team1_score = t1_score
+            team2_score = t2_score
 
-        if self.team1_scores > self.team2_scores:
+        if team1_score > team2_score:
             slow_text(f"Congratulations, {team1_name} wins the Champions League after penalties!!!\n", 0, 5)
             return True
         else:
             slow_text(f"You lost! {team2_name} wins the Champions League after penalties...\n", 0, 5)
             return False
             
-
-    def scores_question(self, team1_name, team2_name, question, question_outcome):
+    def scores_question(self, team1_name, team2_name, team1_score, team2_score, question, answer):
         """ Gives a score to a team depending on correct answering of a question. 
-        Gives also a score for the opponents team"""
+        Gives also a score to the opponents team"""
     
         question_right = randint(1, 10)
         question_wrong = randint(1, 6) #chance to score a penalty when question is wrong
@@ -181,79 +96,58 @@ class FootballFinal:
         false = ["False", "false", "F", "f"]
         
         print(question)
+
         while True:
             choice = input("> ")
-            if question_outcome == "True": #answer is true
-                if choice in false:
-                    if question_wrong < 2:
-                        self.team1_scores += 1
-                        slow_text("Wrong answer!\n", 0, 2)
-                        slow_text(f"However, {team1_name} manages to score a really lucky goal!\n", 0, 3)
-                        slow_text(f"\nThe score is {self.team1_scores} -- {self.team2_scores}\n", 0, 3)
-                        break
-                    else:
-                        self.team1_scores += 0
-                        slow_text("Wrong answer!\n", 0, 2)
-                        slow_text("Oof, brilliant safe from the goalkeeper!\n", 0, 3)
-                        slow_text(f"\nThe score is {self.team1_scores} -- {self.team2_scores}\n", 0, 3)
-                        break
-                elif choice in true:
-                    if question_right <= 8:
-                        self.team1_scores += 1
-                        slow_text("Correct!\n", 0, 2)
-                        slow_text(f"{team1_name} manages to score the penalty!!\n", 0, 3)
-                        slow_text(f"\nThe score is {self.team1_scores} -- {self.team2_scores}\n", 0, 3)
-                        break
-                    else:
-                        self.team1_scores += 0
-                        slow_text("Correct!\n", 0, 2)
-                        slow_text("Auch, that is an unlucky shot! He misses..\n", 0, 3)
-                        slow_text(f"\nThe score is {self.team1_scores} -- {self.team2_scores}\n", 0, 3)
-                        break
-                else:
-                    slow_text("That is not a valid answer, please try again.\n", 0, 3)  
-                    continue
-            elif question_outcome == "False": #answer is false
-                if choice in true:
-                    if question_wrong < 2:
-                        self.team1_scores += 1
-                        slow_text("Wrong answer!\n", 0, 2)
-                        slow_text(f"However, {team1_name} manages to score a really lucky goal!\n", 0, 3)
-                        slow_text(f"\nThe score is {self.team1_scores} -- {self.team2_scores}\n", 0, 3)
-                        break
-                    else:
-                        self.team1_scores += 0
-                        slow_text("Wrong answer!\n", 0, 2)
-                        slow_text("Oof, brilliant safe from the goalkeeper!\n", 0, 3)
-                        slow_text(f"\nThe score is {self.team1_scores} -- {self.team2_scores}\n", 0, 3)
-                        break
-                elif choice in false:
-                    if question_right <= 8:
-                        self.team1_scores += 1
-                        slow_text("Correct!\n", 0, 2)
-                        slow_text(f"{team1_name} manages to score the penalty!!\n", 0, 3)
-                        slow_text(f"\nThe score is {self.team1_scores} -- {self.team2_scores}\n", 0, 3)
-                        break
-                    else:
-                        self.team1_scores += 0
-                        slow_text("Correct!\n", 0, 2)
-                        slow_text("Auch, that is an unlucky shot! He misses..\n", 0, 3)
-                        slow_text(f"\nThe score is {self.team1_scores} -- {self.team2_scores}\n", 0, 3)
-                        break
-                else:
-                    slow_text("That is not a valid answer, please try again.\n", 0, 0)
-                    continue
 
-            # Penalty opponent
+            if choice in true or choice in false:
+                if choice in true:
+                    choice = "True"
+                else:
+                    choice = "False"
+
+                if choice == answer:
+                    if question_right <= 8:
+                        team1_score += 1
+                        slow_text("Correct!\n", 0, 2)
+                        slow_text(f"{team1_name} manages to score the penalty!!\n", 0, 3)
+                        slow_text(f"\nThe score is {team1_score} -- {team2_score}\n", 0, 3)
+                        break
+                    else:
+                        team1_score += 0
+                        slow_text("Correct!\n", 0, 2)
+                        slow_text("Auch, that is an unlucky shot! He misses..\n", 0, 3)
+                        slow_text(f"\nThe score is {team1_score} -- {team2_score}\n", 0, 3)
+                        break
+                else:
+                    if question_wrong < 2:
+                        team1_score += 1
+                        slow_text("Wrong answer!\n", 0, 2)
+                        slow_text(f"However, {team1_name} manages to score a really lucky goal!\n", 0, 3)
+                        slow_text(f"\nThe score is {team1_score} -- {team2_score}\n", 0, 3)
+                        break
+                    else:
+                        team1_score += 0
+                        slow_text("Wrong answer!\n", 0, 2)
+                        slow_text("Oof, brilliant safe from the goalkeeper!\n", 0, 3)
+                        slow_text(f"\nThe score is {team1_score} -- {team2_score}\n", 0, 3)
+                        break
+            else:
+                slow_text("That is not a valid answer, please try again.\n", 0, 0)  
+                continue
+
+        # Penalty opponent
         slow_text("\nOpponents turn!\n", 0, 3)
         if chance_opponent == 1:
-            self.team2_scores += 1
+            team2_score += 1
             slow_text(f"{team2_name} manages to score the penalty!\n", 0, 3)
-            slow_text(f"\nThe score is {self.team1_scores} -- {self.team2_scores}\n", 0, 3)
+            slow_text(f"\nThe score is {team1_score} -- {team2_score}\n", 0, 3)
         else:
-            self.team2_scores += 0
+            team2_score += 0
             slow_text(f"{team2_name} misses the penalty!\n", 0, 3)
-            slow_text(f"\nThe score is {self.team1_scores} -- {self.team2_scores}\n", 0, 3)
+            slow_text(f"\nThe score is {team1_score} -- {team2_score}\n", 0, 3)
+        
+        return team1_score, team2_score
 
 
 class MonsterFight:
@@ -261,7 +155,7 @@ class MonsterFight:
     def enter_world(self):
         slow_text("You spot a cave in the distance.\n", 0, 3) 
         slow_text("You walk towards it and decide to enter it.\n", 0, 3)
-        slow_text("As you slowly walk through the cave you suddenly approach a round door.\n", 0, 3)
+        slow_text("As you slowly walk through the cave you approach a round door.\n", 0, 3)
         slow_text("It stops you from going further.\n", 0, 3)
         slow_text("There appears to be a riddle on the door:\n", 0, 3)
         slow_text("\tI am long\n", 0, 0)
@@ -286,8 +180,8 @@ class MonsterFight:
             print("\n")
             return False
         else:
-            slow_text("You hear a loud click. The door slowly opens...\n", 0 , 4)
-            slow_text("In the distance you see a massive Basilisk sleeping on the floor...\n", 0, 5) 
+            slow_text("You hear a loud click. The door slowly opens...\n", 0 , 3)
+            slow_text("In the distance you see a massive Basilisk sleeping on the floor...\n", 0, 4) 
             print("Disturb it or flee?")
             choice = input("> ").lower()
             if choice == "disturb" or choice == "disturb it":
