@@ -10,7 +10,86 @@ def slow_text(string, delay, wait):
         time.sleep(delay)
     time.sleep(wait)
 
-        
+
+class GamesNight:
+
+    def enter_world(self):
+        slow_text("Hello! You just entered the arena of roshambo!\n", 0, 3) 
+        slow_text("You will need to participate in a game before you may continue.\n", 0, 3)
+        slow_text("To pass, you need to win 3 times from the computer.\n", 0, 3)
+
+        choice = ["rock", "paper", "scissors"]
+        computer = choice[randint(0, 2)]
+        wins = 0
+
+        while wins <= 2:
+            print("Rock, paper or scissors?")
+            player = input("> ").lower()
+            computer = choice[randint(0, 2)]
+
+            if player == computer:
+                print("Tie!")
+            elif player == "rock":
+                if computer == "paper":
+                    print("You lose!", computer, "covers", player)
+                else:
+                    print("You win!", player, "smashes", computer)
+                    wins += 1
+                    print(f"You won 1 point! Your total is {wins}.")
+            elif player == "paper":
+                if computer == "scissors":
+                    print("You lose!", computer, "cut", player)
+                else:
+                    print("You win!", player, "covers", computer)
+                    wins += 1
+                    print(f"You won 1 point! Your total is {wins}.")
+            elif player == "scissors":
+                if computer == "rock":
+                    print("You lose...", computer, "smashes", player)
+                else:
+                    print("You win!", player, "cut", computer)
+                    wins += 1
+                    print(f"You won 1 point! Your total is {wins}.")
+            else:
+                print("That's not a valid option!\n")
+                continue
+        else:
+            print("You just completed the first stage!")
+            name = input ("What's your name? ") 
+            slow_text(f"Very well {name}, now things will get a bit more difficult.\n", 0, 3)
+            slow_text("You just enterd the second arena!\n", 0, 3)
+            slow_text("Welcome to the Quiz, where you have to answer 5 out of 6 questions correct.\n", 0, 3)
+            slow_text("Remember, the following questions are almost all answered with True or False.\n", 0, 3)
+            slow_text(f"\nOkay {name}, let's get started!\n", 0, 3) 
+
+            t = ["True", "true", "T", "t"]
+            f = ["False", "false", "F", "f"]
+            questions = [
+                ("\nThe capital of iceland is Reykjavik.", t),
+                ("\nThe elephant is the biggest land animal.", t),
+                ("\n97 is a prime number.", t),
+                ("\nComplete the following sequence: 16 - 4 - 8 - 12 - 3 - 6 - ...", ["9"]),
+                ("\nThe number of inhabitants for Germany, Spain and France together exceeds the number of inhabitants in Nigeria.", f),
+                ("\nThe world largest nation without any ocean boundaries is Kazachstan.", t)
+            ]
+            correct = 0 
+            for q, a in questions:
+                print(q)
+                choice = input("> ")
+                if choice in a:
+                    correct += 1
+
+            slow_text(f"\nYou're finished, {name}. You got {correct} out of 6 correct.\n", 0, 2)
+            time.sleep(2)
+            if correct >= 4:
+                slow_text("Well done.\n", 0, 2)
+                slow_text("You complete the second and final stage!\n", 0, 2)
+                return True
+            else:
+                slow_text(f"You come {4 - correct} short. Try better next time!\n", 0, 2)
+                return False
+
+
 class FootballFinal:
 
     def enter_world(self):
@@ -292,7 +371,7 @@ class Main:
         self.worlds = {
             'World 1': MonsterFight(), 
             'World 2': FootballFinal(),
-            # 'World 3': ,
+            'World 3': GamesNight(),
             # 'World 4': 
         }
         self.completed = {f'World {i}': False for i in range(1, 5)}
@@ -308,19 +387,20 @@ class Main:
         print("Welcome (back) to the main menu.\n")
         print("Available worlds:")
         print("\tWorld 1: Defeat a tough monster!")
-        print("\tWorld 2: Champions League final!\n")
-        print(f"Completed: {', '.join([key for key, value in self.completed.items() if value is True])} \n")
+        print("\tWorld 2: Champions League final!")
+        print("\tWorld 3: Become a Game master!")
+        print(f"\nCompleted: {', '.join([key for key, value in self.completed.items() if value is True])} \n")
         print("Type below the world you want to enter!")
         while True:
-            world_choice = input("> ")
-            if world_choice not in self.worlds.keys():
+            world_choice = input("> ").lower()
+            if world_choice not in map(lambda x: x.lower(), self.worlds.keys()):
                 print("Not a world.")
                 continue
             else:
-                slow_text(f"Entering {world_choice}.\n", 0, 2)
+                slow_text(f"Entering {world_choice.capitalize()}.\n", 0, 2)
                 print("--------")
                 break
-        return world_choice
+        return world_choice.capitalize()
     
     def play(self):
         while True:
