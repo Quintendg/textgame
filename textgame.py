@@ -14,48 +14,42 @@ def slow_text(string, delay, wait):
 class GamesNight:
 
     def enter_world(self):
-        slow_text("Hello! You just entered the arena of roshambo!\n", 0, 3) 
-        slow_text("You will need to participate in a game before you may continue.\n", 0, 3)
-        slow_text("To pass, you need to win 3 times from the computer.\n", 0, 3)
+        slow_text("Welcome to a game of randomized dice rolling.\n", 0, 3)
+        slow_text("As you may input a number between 1 and 12, the output will be random. \n", 0, 3)
+        slow_text("That means, both you and the computer have as much chance, or is there? \n", 0, 3)
+        slow_text("If you crack the mathematics behind the game, success will be on your side! \n", 0, 3)
 
-        choice = ["rock", "paper", "scissors"]
-        computer = choice[randint(0, 2)]
-        wins = 0
-
-        while wins <= 2:
-            print("Rock, paper or scissors?")
-            player = input("> ").lower()
-            computer = choice[randint(0, 2)]
-
-            if player == computer:
-                print("Tie!")
-            elif player == "rock":
-                if computer == "paper":
-                    print("You lose!", computer, "covers", player)
-                else:
-                    print("You win!", player, "smashes", computer)
-                    wins += 1
-                    print(f"You won 1 point! Your total is {wins}.")
-            elif player == "paper":
-                if computer == "scissors":
-                    print("You lose!", computer, "cut", player)
-                else:
-                    print("You win!", player, "covers", computer)
-                    wins += 1
-                    print(f"You won 1 point! Your total is {wins}.")
-            elif player == "scissors":
-                if computer == "rock":
-                    print("You lose...", computer, "smashes", player)
-                else:
-                    print("You win!", player, "cut", computer)
-                    wins += 1
-                    print(f"You won 1 point! Your total is {wins}.")
-            else:
-                print("That's not a valid option!\n")
+        points = 0
+        while points < 80:
+            try:
+                player = int(input("Pick a number between 1 and 12: "))
+            except:
+                print("Provide a number!")
                 continue
+            player_throw = randint(1, player)
+            player_throw2 = 0
+            if player_throw <= 2:
+                player_throw2 += 11
+            elif player_throw > 6: 
+                player_throw2 += 1
+            else:
+                player_throw2 += 5
+
+            computer = randint(1, 12)
+            if player_throw2 == computer:
+                print("Its a tie")
+            elif player_throw2 > computer:
+                print(f"You rolled a {player_throw2} against {computer}, and scored 10 points.")
+                points += 10
+                if points > 80:
+                    print("Great job! You just beat the computer in a dice game.")
+                else:
+                    print("Go again!")
+            else:
+                print(f"You just threw {player_throw2} and lost against the computer {computer}.")
         else:
-            print("You just completed the first stage!")
-            name = input ("What's your name? ") 
+            slow_text("You completed the first stage!\n\n", 0, 3)
+            name = input("What's your name? ") 
             slow_text(f"Very well {name}, now things will get a bit more difficult.\n", 0, 3)
             slow_text("You just enterd the second arena!\n", 0, 3)
             slow_text("Welcome to the Quiz, where you have to answer 5 out of 6 questions correct.\n", 0, 3)
@@ -406,8 +400,11 @@ class Main:
         while True:
             world = self.main_menu()
             current_world_completed = self.worlds.get(world).enter_world()
-            if self.completed[world] is not True: #assures already completed world stays completed even if player restarts level and then loses the level
+
+            #ensures already completed world stays completed even if player restarts level and then loses the level
+            if self.completed[world] is not True: 
                 self.completed[world] = current_world_completed
+
             if self.all_worlds_completed():
                 slow_text("Congratulations, you beat all worlds! Game ends now.", 0, 3)
                 break
