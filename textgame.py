@@ -356,7 +356,7 @@ class MonsterFight:
                 slow_text("Oh dear... you're dead...\n", 0.2, 3)
                 return False
             else:
-                slow_text(f"You have {legend_hp}/500 HP\n\n", 0 , 2)
+                slow_text(f"You have {legend_hp}/500 HP\n\n", 0, 2)
 
 
 class Main:
@@ -365,8 +365,7 @@ class Main:
         self.worlds = {
             'World 1': MonsterFight(), 
             'World 2': FootballFinal(),
-            'World 3': GamesNight(),
-            # 'World 4': 
+            'World 3': GamesNight()
         }
         self.completed = {f'World {i}': False for i in range(1, 5)}
 
