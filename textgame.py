@@ -23,6 +23,9 @@ class GamesNight:
         while points < 80:
             try:
                 player = int(input("Pick a number between 1 and 12: "))
+                if not 0 < player < 13:
+                    print("A number between 1 and 12!")
+                    continue
             except:
                 print("Provide a number!")
                 continue
