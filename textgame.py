@@ -78,7 +78,7 @@ class GamesNight:
 
             slow_text(f"\nYou're finished, {name}. You got {correct} out of 6 correct.\n", 0, 2)
             time.sleep(2)
-            if correct >= 4:
+            if correct >= 5:
                 slow_text("Well done.\n", 0, 2)
                 slow_text("You complete the second and final stage!\n", 0, 2)
                 return True
